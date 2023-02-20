@@ -1,63 +1,54 @@
 <?php
-// assignment no 04
 
-// 1.Write a PHP function to sort an array of strings by their length, in ascending order. (Hint: You can use the usort() function to define a custom sorting function.)
-
-
-$arr = array("sabbir", "korim", "refuji", "Yousof Vai");
-
-function arrayByLenth($arr) {
-    usort($arr, function($a, $b) {
-        return (strlen($a) - strlen($b));
-    });
-
-    return $arr;
+//Problem 01: Write a PHP function to sort an array of strings by their length, in ascending order. (Hint: You can use the usort() function to define a custom sorting function.
+function sortByStrLength( array $string ): array
+{
+    usort( $string, function ( $a, $b ) {
+        return strlen( $a ) - strlen( $b );
+    } );
+    return $string;
 }
 
-print_r(arrayByLenth($arr));
+$fruits = array( 'apple', 'banana', 'orange', 'liche', 'grape', 'mango' );
+print_r( sortByStrLength( $fruits ) );
 
-echo "\n";
+echo "\n\n";
 
-$fStr = 'Sabbir Ahmmed';
-$lStr = 'Is bad boy';
-
-function concatenateTwoStrings($a, $b) {
-    $a = explode(' ',$a);
-    $a = array_shift($a);
-    
-    $b = explode(' ',$b);
-    $b = strrev(array_pop($b));
-
-    return ($a.' '.$b);
+//Problem 02: Write a PHP function to concatenate two strings, but with the second string starting from the end of the first string.
+function concatTwoString( string $firstStr, string $secondStr ): string {
+    return $firstStr .= $secondStr;
 }
-echo concatenateTwoStrings($fStr, $lStr);
+echo concatTwoString( "Hello", "World!" );
 
-echo "\n";
+echo "\n\n";
 
-$oldArray = array("sabbir", "korim", "refuji", "Yousof Vai");
-
-function removeLastFirstAndReturnArray($oldArray){
-    array_pop($oldArray);
-    array_shift($oldArray);
-
-    return $oldArray;
+// //Problem 03: Write a PHP function to remove the first and last element from an array and return the remaining elements as a new array.
+function removeFirstAndLastElement( array $array ): array
+{
+    return array_slice( $array, 1, -1 );
 }
-$newArroy = removeLastFirstAndReturnArray($oldArray);
-print_r($newArroy);
+$peoples = array( 'Hasan', 'Towfiq', 'Tarik', 'Habib', 'Yakub', 'Shohag', "milon" );
+print_r( removeFirstAndLastElement( $peoples ) );
 
-echo "\n";
+echo "\n\n";
 
-
-function containsOnlyLettersAndWhitespace($str) {
-    if ( preg_match ("/^[a-zA-Z\s]+$/",$str)) {
-        $result = "string contains only letters and whitespace";
+//Problem 04: Write a PHP function to check if a string contains only letters and whitespace.
+function checkString( string $string ): string {
+    if ( preg_match( '/^[A-Za-z\s]+$/', $string ) ) {
+        return "contains letters & whitespace";
     } else {
-        $result = "not string contains only letters and whitespace";
+        return "The string contains other characters";
     }
-    return $result;
 }
-$str1 = "Hellow word";
-$str2 = "Hellow word jaman";
+$str = "Touhid Hasan";
+echo checkString( $str );
 
-echo containsOnlyLettersAndWhitespace($str1).PHP_EOL;
-echo containsOnlyLettersAndWhitespace($str2);
+echo "\n\n";
+
+//Problem 05: Write a PHP function to find the second largest number in an array of numbers.
+function largestSecondNumber( array $number ): int {
+    rsort( $number );
+    return $number[1];
+}
+$number = array( 2, 4, 76, 7, 54, 99 );
+echo "The largest second number is " . largestSecondNumber( $number );
